@@ -44,9 +44,11 @@ namespace PVZOnline {
             char ch = e.KeyChar;
             if (ch == '\r') {
                 this.Text = "";
-            } else if (ch == '\b') {
+            }
+            else if (ch == '\b' && this.Text.Length >= 1) {
                 this.Text = this.Text.Substring(0, this.Text.Length - 1);
-            } else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')) {
+            }
+            else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')) {
                 this.Text += e.KeyChar;
             }
 
