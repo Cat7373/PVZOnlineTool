@@ -9,6 +9,7 @@ namespace PVZOnline {
         /// </summary>
         private Questions questions = new Questions();
         private bool first = true;
+        private const String DEFAULT_TITLE = "植物大战僵尸online脑力达人速查工具 By:Cat73 QQ:1901803382";
 
         public MainForm() {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace PVZOnline {
             listBox1.Items.Add("三行分别为: 问题 答案 拼音, 两行的则没有拼音");
             listBox1.Items.Add("两个问题之间要用至少一个空行隔开");
             listBox1.Items.Add("// 开头的行是注释, 只能加在题目前后, 不能加在中间");
+            setDefauleTitle();
         }
 
         private void listBox1_KeyPress(object sender, KeyPressEventArgs e) {
@@ -52,15 +54,25 @@ namespace PVZOnline {
                 this.Text += e.KeyChar;
             }
 
-            if (title != this.Text) {
+            if (!title.Equals(this.Text)) {
                 listBox1.Items.Clear();
 
-                Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.Text);
-                foreach (Dictionary<String, String> qusetion in qusetions) {
-                    listBox1.Items.Add(qusetion["question"]);
-                    listBox1.Items.Add("    " + qusetion["answer"]);
+                if (!this.Text.Equals("")) {
+                    Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.Text);
+                    foreach (Dictionary<String, String> qusetion in qusetions) {
+                        listBox1.Items.Add(qusetion["question"]);
+                        listBox1.Items.Add("    " + qusetion["answer"]);
+                    }
+                }
+                else {
+                    setDefauleTitle();
                 }
             }
+        }
+
+        private void setDefauleTitle() {
+            this.Text = DEFAULT_TITLE;
+            this.first = true;
         }
     }
 }

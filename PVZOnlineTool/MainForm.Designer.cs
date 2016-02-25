@@ -47,7 +47,6 @@
             this.MinimumSize = new System.Drawing.Size(280, 100);
             this.Name = "MainForm";
             this.Opacity = 0.95D;
-            this.Text = "植物大战僵尸online脑力达人速查工具 By:Cat73 QQ:1901803382";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
