@@ -8,34 +8,20 @@ namespace PVZOnline {
         /// 题目表
         /// </summary>
         private Questions questions = new Questions();
+        private bool first = true;
 
         public MainForm() {
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e) {
-            Dictionary<String, String>[] qusetions = this.questions.getQuestion(textBox1.Text);
-            listBox1.Items.Clear();
-            foreach (Dictionary<String, String> qusetion in qusetions) {
-                listBox1.Items.Add(qusetion["question"]);
-                listBox1.Items.Add("    " + qusetion["answer"]);
-            }
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e) {
-            if (e.KeyChar == '\r') {
-                textBox1.Text = "";
-            }
-        }
-
         private void MainForm_Load(object sender, EventArgs e) {
             listBox1.Items.Add("植物大战僵尸online脑力达人速查工具");
-            listBox1.Items.Add("Version: 1.0.0.1");
-            listBox1.Items.Add("更新时间: 2016-2-25 03:37:45");
+            listBox1.Items.Add("Version: 1.0.0.2");
+            listBox1.Items.Add("更新时间: 2016-2-25 12:26:04");
             listBox1.Items.Add("By: Cat73, QQ: 1901803382");
             listBox1.Items.Add("");
             listBox1.Items.Add("使用说明:");
-            listBox1.Items.Add("在上面的文本框里输入问题的首字母缩写来查询问题");
+            listBox1.Items.Add("直接输入问题的首字母缩写来查询问题");
             listBox1.Items.Add("比如输入 jsh 可以查询 金水壶 相关的问题");
             listBox1.Items.Add("回车可以快速清除已输入的内容");
             listBox1.Items.Add("");
@@ -45,6 +31,34 @@ namespace PVZOnline {
             listBox1.Items.Add("三行分别为: 问题 答案 拼音, 两行的则没有拼音");
             listBox1.Items.Add("两个问题之间要用至少一个空行隔开");
             listBox1.Items.Add("// 开头的行是注释, 只能加在题目前后, 不能加在中间");
+        }
+
+        private void listBox1_KeyPress(object sender, KeyPressEventArgs e) {
+            String title = this.Text;
+
+            if (first) {
+                this.Text = "";
+                first = false;
+            }
+            
+            char ch = e.KeyChar;
+            if (ch == '\r') {
+                this.Text = "";
+            } else if (ch == '\b') {
+                this.Text = this.Text.Substring(0, this.Text.Length - 1);
+            } else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')) {
+                this.Text += e.KeyChar;
+            }
+
+            if (title != this.Text) {
+                listBox1.Items.Clear();
+
+                Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.Text);
+                foreach (Dictionary<String, String> qusetion in qusetions) {
+                    listBox1.Items.Add(qusetion["question"]);
+                    listBox1.Items.Add("    " + qusetion["answer"]);
+                }
+            }
         }
     }
 }

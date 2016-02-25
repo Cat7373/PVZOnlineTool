@@ -98,18 +98,17 @@ namespace PVZOnline {
         /// <param name="question">问题</param>
         /// <returns>问题的拼音速查代码</returns>
         private String getPinYin(string question) {
-            StringBuilder pinyin = new StringBuilder();
+            StringBuilder result = new StringBuilder();
             foreach (char ch in question.ToLower()) {
-                string t = Pinyin.GetPinyin(ch);
-                if (t[0] == ch) {
-                    if (!((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z'))) {
-                        continue;
-                    }
+                string pinyin = Pinyin.GetPinyin(ch);
+                char firstPinyin = pinyin[0];
+                if ((firstPinyin >= '0' && firstPinyin <= '9') || (firstPinyin >= 'a' && firstPinyin <= 'z')) {
+                    result.Append(firstPinyin);
                 }
-                pinyin.Append(t, 0, 1);
+                
             }
 
-            return pinyin.ToString();
+            return result.ToString();
         }
 
         /// <summary>
