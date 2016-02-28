@@ -44,7 +44,7 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(484, 192);
             this.Controls.Add(this.listBox1);
-            this.MinimumSize = new System.Drawing.Size(280, 100);
+            this.MinimumSize = new System.Drawing.Size(250, 90);
             this.Name = "MainForm";
             this.Opacity = 0.95D;
             this.TopMost = true;
