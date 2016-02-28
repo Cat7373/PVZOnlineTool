@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace PVZOnline {
@@ -8,71 +10,67 @@ namespace PVZOnline {
         /// 题目表
         /// </summary>
         private Questions questions = new Questions();
-        private bool first = true;
-        private const String DEFAULT_TITLE = "植物大战僵尸online脑力达人速查工具 By:Cat73 QQ:1901803382";
+        private String DEFAULT_TITLE;
+        private StringBuilder selectString = new StringBuilder();
 
         public MainForm() {
             InitializeComponent();
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            listBox1.Items.Add("植物大战僵尸online脑力达人速查工具");
-            listBox1.Items.Add("Version: 1.0.0.2");
-            listBox1.Items.Add("更新时间: 2016-2-25 12:26:04");
-            listBox1.Items.Add("By: Cat73, QQ: 1901803382");
-            listBox1.Items.Add("");
-            listBox1.Items.Add("使用说明:");
-            listBox1.Items.Add("直接输入问题的首字母缩写来查询问题");
-            listBox1.Items.Add("比如输入 jsh 可以查询 金水壶 相关的问题");
-            listBox1.Items.Add("回车可以快速清除已输入的内容");
-            listBox1.Items.Add("");
-            listBox1.Items.Add("题库说明:");
-            listBox1.Items.Add("跟本程序在一个目录里的 Questions.txt 就是题库");
-            listBox1.Items.Add("题库里的题目可以写三行或者两行");
-            listBox1.Items.Add("三行分别为: 问题 答案 拼音, 两行的则没有拼音");
-            listBox1.Items.Add("两个问题之间要用至少一个空行隔开");
-            listBox1.Items.Add("// 开头的行是注释, 只能加在题目前后, 不能加在中间");
-            setDefauleTitle();
+            FileStream questionDBFile = new FileStream("info.txt", FileMode.Open);
+            StreamReader streamReader = new StreamReader(questionDBFile);
+
+            String strLine = streamReader.ReadLine();
+            if (strLine != null) {
+                DEFAULT_TITLE = strLine;
+                strLine = streamReader.ReadLine();
+                while (strLine != null) {
+                    listBox1.Items.Add(strLine);
+                    strLine = streamReader.ReadLine();
+                }
+            }
+
+            streamReader.Close();
+            questionDBFile.Close();
+
+            setTitle();
         }
 
         private void listBox1_KeyPress(object sender, KeyPressEventArgs e) {
-            String title = this.Text;
-
-            if (first) {
-                this.Text = "";
-                first = false;
-            }
-            
             char ch = e.KeyChar;
             if (ch == '\r') {
-                this.Text = "";
+                this.selectString.Clear();
             }
             else if (ch == '\b' && this.Text.Length >= 1) {
-                this.Text = this.Text.Substring(0, this.Text.Length - 1);
+                this.selectString.Remove(this.selectString.Length - 1, 1);
             }
             else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')) {
-                this.Text += e.KeyChar;
+                this.selectString.Append(ch);
+            }
+            else {
+                return;
             }
 
-            if (!title.Equals(this.Text)) {
-                listBox1.Items.Clear();
+            setTitle();
+            listBox1.Items.Clear();
 
-                if (!this.Text.Equals("")) {
-                    Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.Text);
-                    foreach (Dictionary<String, String> qusetion in qusetions) {
-                        listBox1.Items.Add(qusetion["question"]);
-                        listBox1.Items.Add("    " + qusetion["answer"]);
-                    }
-                }
-                else {
-                    setDefauleTitle();
+            if (this.selectString.Length > 0) {
+                Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.selectString.ToString());
+                foreach (Dictionary<String, String> qusetion in qusetions) {
+                    listBox1.Items.Add(qusetion["question"]);
+                    listBox1.Items.Add("    " + qusetion["answer"]);
                 }
             }
         }
 
-        private void setDefauleTitle() {
-            this.Text = DEFAULT_TITLE;
-            this.first = true;
+        private void setTitle() {
+            if (this.selectString.Length > 0) {
+                this.Text = this.selectString.ToString();
+            }
+            else {
+                this.Text = DEFAULT_TITLE;
+            }
         }
     }
 }

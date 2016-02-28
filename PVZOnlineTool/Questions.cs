@@ -19,7 +19,7 @@ namespace PVZOnline {
         /// 初始化
         /// </summary>
         public Questions() {
-            FileStream questionDBFile = new FileStream("Questions.txt", FileMode.Open);
+            FileStream questionDBFile = new FileStream("questions.txt", FileMode.Open);
             StreamReader streamReader = new StreamReader(questionDBFile);
 
             String strLine = streamReader.ReadLine();
@@ -105,7 +105,6 @@ namespace PVZOnline {
                 if ((firstPinyin >= '0' && firstPinyin <= '9') || (firstPinyin >= 'a' && firstPinyin <= 'z')) {
                     result.Append(firstPinyin);
                 }
-                
             }
 
             return result.ToString();
@@ -118,7 +117,6 @@ namespace PVZOnline {
         /// <returns>题目列表</returns>
         public Dictionary<String, String>[] getQuestion(String pinyin) {
             List<Dictionary<String, String>> result = new List<Dictionary<String, String>>();
-            pinyin = pinyin.ToLower();
 
             IEnumerator<Dictionary<String, String>> it = questions.GetEnumerator();
             while (it.MoveNext()) {
