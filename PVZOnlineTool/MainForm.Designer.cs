@@ -30,10 +30,11 @@
             // 
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
+            this.listBox1.IntegralHeight = false;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(484, 192);
+            this.listBox1.Size = new System.Drawing.Size(384, 162);
             this.listBox1.TabIndex = 1;
             this.listBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listBox1_KeyPress);
             // 
@@ -42,7 +43,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(484, 192);
+            this.ClientSize = new System.Drawing.Size(384, 162);
             this.Controls.Add(this.listBox1);
             this.MinimumSize = new System.Drawing.Size(250, 90);
             this.Name = "MainForm";

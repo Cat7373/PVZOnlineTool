@@ -88,7 +88,7 @@ namespace PVZOnline {
             dictonary.Add("pinyin", pinyin.ToLower());
             questions.Add(dictonary);
 
-            // Console.Out.Write("[Debug] addQuestion\nQ: {0}\nA: {1}\nP: {2}\n", question, answer, pinyin);
+            // Console.Out.WriteLine("[Debug] addQuestion: Q: {0}; A: {1}; P: {2}", question, answer, pinyin);
         }
 
         /// <summary>
