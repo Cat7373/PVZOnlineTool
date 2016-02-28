@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PVZOnline</RootNamespace>
-    <AssemblyName>植物大战僵尸Online脑力达人速查工具</AssemblyName>
+    <AssemblyName>根据拼音首字母速查题库的小工具</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
