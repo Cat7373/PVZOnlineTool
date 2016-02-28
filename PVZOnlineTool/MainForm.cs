@@ -17,22 +17,34 @@ namespace PVZOnline {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e) {
-            FileStream questionDBFile = new FileStream("info.txt", FileMode.Open);
-            StreamReader streamReader = new StreamReader(questionDBFile);
+        private void MainForm_Load(object sender, EventArgs args) {
+            FileStream infoFile = null;
+            StreamReader streamReader = null;
+            try {
+                infoFile = new FileStream("info.txt", FileMode.Open);
+                streamReader = new StreamReader(infoFile);
 
-            String strLine = streamReader.ReadLine();
-            if (strLine != null) {
-                DEFAULT_TITLE = strLine;
-                strLine = streamReader.ReadLine();
-                while (strLine != null) {
-                    listBox1.Items.Add(strLine);
+                String strLine = streamReader.ReadLine();
+                if (strLine != null) {
+                    this.DEFAULT_TITLE = strLine;
                     strLine = streamReader.ReadLine();
+                    while (strLine != null) {
+                        listBox1.Items.Add(strLine);
+                        strLine = streamReader.ReadLine();
+                    }
                 }
             }
-
-            streamReader.Close();
-            questionDBFile.Close();
+            catch (Exception e) {
+                this.DEFAULT_TITLE = "";
+            }
+            finally {
+                if (streamReader != null) {
+                    streamReader.Close();
+                }
+                if (infoFile != null) {
+                    infoFile.Close();
+                }
+            }
 
             setTitle();
         }
@@ -69,7 +81,7 @@ namespace PVZOnline {
                 this.Text = this.selectString.ToString();
             }
             else {
-                this.Text = DEFAULT_TITLE;
+                this.Text = this.DEFAULT_TITLE;
             }
         }
     }

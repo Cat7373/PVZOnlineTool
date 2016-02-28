@@ -37,7 +37,6 @@ namespace PVZOnline {
                         case 2:
                             addQuestion(question, answer);
                             break;
-
                     }
                     step = 0;
                 } else {
@@ -126,6 +125,7 @@ namespace PVZOnline {
                     result.Add(current);
                 }
             }
+
             return result.ToArray();
         }
     }
