@@ -63,7 +63,7 @@ namespace PVZOnline {
             if (ch == '\r') { // 回车 清除查询内容
                 this.selectString.Clear();
             }
-            else if (ch == '\b' && this.Text.Length >= 1) { // 删除一个字符
+            else if (ch == '\b' && this.selectString.Length >= 1) { // 删除一个字符
                 this.selectString.Remove(this.selectString.Length - 1, 1);
             }
             else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')) { // 0~9 a~z 将输入的字符添加到查询内容后面
