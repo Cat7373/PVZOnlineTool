@@ -16,61 +16,78 @@ namespace PVZOnline {
 
         internal AutoUpdate (TextReader streamReader) {
             this.read(streamReader);
-            if (this.getNextLine() == null) {
+            if (this.nextLine == null) {
                 return;
             }
 
-            if (!check_regex.IsMatch(this.getNextLine())) {
-                return;
-            }
-
-            this.read(streamReader);
-            if (!this.setURL(this.getNextLine())) {
+            if (!check_regex.IsMatch(this.nextLine)) {
                 return;
             }
 
             this.read(streamReader);
-            if (!this.setVersion(this.getNextLine())) {
+            if (!this.setURL(this.nextLine)) {
                 return;
-            } else {
-                this.ok = true;
             }
+
+            this.read(streamReader);
+            this.ok = this.setVersion(this.nextLine);
         }
 
+        /// <summary>
+        /// 读入一行
+        /// </summary>
+        /// <param name="streamReader"></param>
         private void read (TextReader streamReader) {
             this.nextLine = streamReader.ReadLine();
         }
 
+        /// <summary>
+        /// 获取当前读取的行
+        /// </summary>
+        /// <returns></returns>
         internal string getNextLine () {
             return this.nextLine;
         }
 
-        private bool setURL (string strLine) {
-            if (strLine == null) {
+        /// <summary>
+        /// 设置更新 URL
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        private bool setURL (string line) {
+            if (line == null) {
                 return false;
             }
 
-            if (url_regex.IsMatch(strLine)) {
-                url = url_regex.Match(strLine).Groups[1].ToString();
+            if (url_regex.IsMatch(line)) {
+                this.url = url_regex.Match(line).Groups[1].ToString();
                 return true;
             } else {
                 return false;
             }
         }
 
-        private bool setVersion (string strLine) {
-            if (strLine == null) {
+        /// <summary>
+        /// 设置版本
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
+        private bool setVersion (string line) {
+            if (line == null) {
                 return false;
             }
 
-            if (version_regex.IsMatch(strLine)) {
-                version = int.Parse(version_regex.Match(strLine).Groups[1].ToString());
+            if (version_regex.IsMatch(line)) {
+                this.version = int.Parse(version_regex.Match(line).Groups[1].ToString());
                 return true;
             } else {
                 return false;
             }
         }
 
+        /// <summary>
+        /// 开始自动更新题库
+        /// </summary>
         internal void startUpdate () {
             if (this.ok) {
                 new Thread(autoUpdate).Start();
@@ -78,34 +95,44 @@ namespace PVZOnline {
         }
 
         /// <summary>
-        /// 自动更新
+        /// 自动更新题库
         /// </summary>
         private void autoUpdate () {
+            // 下载指定 URL 的新题库
             string fileData = httpDownloadFile(this.url);
+
+            // 通过新题库实例化一个 AutoUpdate
             TextReader textReader = new StringReader(fileData);
             AutoUpdate autoUpdate = new AutoUpdate(textReader);
+            textReader.Close();
+
+            // 检查新题库的版本是否高于当前版本
             if (autoUpdate.ok && autoUpdate.version > this.version) {
+                // 保存新题库
                 StreamWriter sw = new StreamWriter("questions.txt", false);
                 sw.Write(fileData);
                 sw.Close();
-            }
 
-            Questions questions = new Questions();
-            Program.mainForm.questions = questions;
+                // 切换当前使用的题库到新版本
+                Program.mainForm.questions = new Questions();
+            }
         }
 
         /// <summary>
         /// Http下载文件
         /// </summary>
         private string httpDownloadFile (string url) {
-            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-
-            Stream responseStream = request.GetResponse().GetResponseStream();
+            WebRequest request = WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            Stream responseStream = response.GetResponseStream();
             TextReader textReader = new StreamReader(responseStream);
+
             string data = textReader.ReadToEnd();
 
             textReader.Close();
             responseStream.Close();
+            response.Close();
+
             return data;
         }
     }
