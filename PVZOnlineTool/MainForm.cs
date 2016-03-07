@@ -66,7 +66,7 @@ namespace PVZOnline {
             else if (ch == '\b' && this.selectString.Length >= 1) { // 删除一个字符
                 this.selectString.Remove(this.selectString.Length - 1, 1);
             }
-            else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')) { // 0~9 a~z 将输入的字符添加到查询内容后面
+            else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || ch == ' ') { // 0~9 a~z 将输入的字符添加到查询内容后面
                 this.selectString.Append(ch);
             }
             else {
@@ -78,7 +78,7 @@ namespace PVZOnline {
             listBox1.Items.Clear();
 
             if (this.selectString.Length > 0) {
-                Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.selectString.ToString());
+                Dictionary<String, String>[] qusetions = this.questions.getQuestion(this.selectString.ToString().Split(' '));
                 foreach (Dictionary<String, String> qusetion in qusetions) {
                     listBox1.Items.Add(qusetion["question"]);
                     listBox1.Items.Add("    " + qusetion["answer"]);

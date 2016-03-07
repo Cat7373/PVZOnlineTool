@@ -96,10 +96,10 @@ namespace PVZOnline {
         /// </summary>
         /// <param name="question">问题</param>
         /// <returns>问题的拼音速查代码</returns>
-        private String getPinYin(string question) {
+        private String getPinYin (String question) {
             StringBuilder result = new StringBuilder();
             foreach (char ch in question.ToLower()) {
-                string pinyin = Pinyin.GetPinyin(ch);
+                String pinyin = Pinyin.GetPinyin(ch);
                 char firstPinyin = pinyin[0];
                 if ((firstPinyin >= '0' && firstPinyin <= '9') || (firstPinyin >= 'a' && firstPinyin <= 'z')) {
                     result.Append(firstPinyin);
@@ -114,19 +114,29 @@ namespace PVZOnline {
         /// </summary>
         /// <param name="pinyin">拼音速查代码中的一部分</param>
         /// <returns>题目列表</returns>
-        public Dictionary<String, String>[] getQuestion(String pinyin) {
+        public Dictionary<String, String>[] getQuestion(String[] pinyin) {
             List<Dictionary<String, String>> result = new List<Dictionary<String, String>>();
 
             IEnumerator<Dictionary<String, String>> it = questions.GetEnumerator();
             while (it.MoveNext()) {
                 Dictionary<String, String> current = it.Current;
                 String currentPinyin = current["pinyin"];
-                if (currentPinyin.IndexOf(pinyin) >= 0) {
+                if (canAdd(currentPinyin, pinyin)) {
                     result.Add(current);
                 }
+
             }
 
             return result.ToArray();
+        }
+
+        private bool canAdd (string currentPinyin, string[] pinyin) {
+            foreach (String currentPinyin2 in pinyin) {
+                if (currentPinyin.IndexOf(currentPinyin2) < 0) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
