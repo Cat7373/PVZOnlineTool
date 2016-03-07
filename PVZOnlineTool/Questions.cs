@@ -1,39 +1,51 @@
-﻿using NPinyin;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using NPinyin;
 
 namespace PVZOnline {
     /// <summary>
     /// 题目表类
     /// </summary>
     class Questions {
+
+        private static bool autoUpdate = true;
         /// <summary>
         /// 题目表
         /// </summary>
-        private List<Dictionary<String, String>> questions = new List<Dictionary<String, String>>();
+        private List<Dictionary<string, string>> questions = new List<Dictionary<string, string>>();
 
         /// <summary>
         /// 初始化
         /// </summary>
-        public Questions() {
-            FileStream questionDBFile = new FileStream("questions.txt", FileMode.Open);
-            StreamReader streamReader = new StreamReader(questionDBFile);
+        public Questions () {
+            TextReader textReader = new StreamReader("questions.txt");
 
-            String strLine = streamReader.ReadLine();
+            string strLine;
+            if (Questions.autoUpdate) {
+                Questions.autoUpdate = false;
+
+                AutoUpdate autoUpdate = new AutoUpdate(textReader);
+                autoUpdate.startUpdate();
+
+                strLine = autoUpdate.getNextLine();
+            } else {
+                strLine = textReader.ReadLine();
+            }
+
+
             // 0: 等待读
             // 1: Q
             // 2: A
             // 3: 拼音
             int step = 0;
-            String question = null;
-            String answer = null;
+            string question = null;
+            string answer = null;
 
             while (strLine != null) {
                 if (strLine.StartsWith("//") || strLine.Trim().Equals("")) {
-                    switch (step) { 
+                    switch (step) {
                         case 2:
                             addQuestion(question, answer);
                             break;
@@ -55,15 +67,14 @@ namespace PVZOnline {
                     }
                 }
 
-                strLine = streamReader.ReadLine();
+                strLine = textReader.ReadLine();
             }
 
             if (step == 2) {
                 addQuestion(question, answer);
             }
 
-            streamReader.Close();
-            questionDBFile.Close();
+            textReader.Close();
         }
 
         /// <summary>
@@ -71,7 +82,7 @@ namespace PVZOnline {
         /// </summary>
         /// <param name="question">问题</param>
         /// <param name="answer">答案</param>
-        private void addQuestion(String question, String answer) {
+        private void addQuestion (string question, string answer) {
             addQuestion(question, answer, getPinYin(question));
         }
 
@@ -81,8 +92,8 @@ namespace PVZOnline {
         /// <param name="question">问题</param>
         /// <param name="answer">答案</param>
         /// <param name="pinyin">拼音</param>
-        private void addQuestion(String question, String answer, String pinyin) {
-            Dictionary<String, String> dictonary = new Dictionary<String, String>();
+        private void addQuestion (string question, string answer, string pinyin) {
+            Dictionary<string, string> dictonary = new Dictionary<string, string>();
             dictonary.Add("question", question);
             dictonary.Add("answer", answer);
             dictonary.Add("pinyin", pinyin.ToLower());
@@ -96,10 +107,10 @@ namespace PVZOnline {
         /// </summary>
         /// <param name="question">问题</param>
         /// <returns>问题的拼音速查代码</returns>
-        private String getPinYin (String question) {
+        private string getPinYin (string question) {
             StringBuilder result = new StringBuilder();
             foreach (char ch in question.ToLower()) {
-                String pinyin = Pinyin.GetPinyin(ch);
+                string pinyin = Pinyin.GetPinyin(ch);
                 char firstPinyin = pinyin[0];
                 if ((firstPinyin >= '0' && firstPinyin <= '9') || (firstPinyin >= 'a' && firstPinyin <= 'z')) {
                     result.Append(firstPinyin);
@@ -114,13 +125,13 @@ namespace PVZOnline {
         /// </summary>
         /// <param name="pinyin">拼音速查代码中的一部分</param>
         /// <returns>题目列表</returns>
-        public Dictionary<String, String>[] getQuestion(String[] pinyin) {
-            List<Dictionary<String, String>> result = new List<Dictionary<String, String>>();
+        public Dictionary<string, string>[] getQuestion (string[] pinyin) {
+            List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
 
-            IEnumerator<Dictionary<String, String>> it = questions.GetEnumerator();
+            IEnumerator<Dictionary<string, string>> it = questions.GetEnumerator();
             while (it.MoveNext()) {
-                Dictionary<String, String> current = it.Current;
-                String currentPinyin = current["pinyin"];
+                Dictionary<string, string> current = it.Current;
+                string currentPinyin = current["pinyin"];
                 if (canAdd(currentPinyin, pinyin)) {
                     result.Add(current);
                 }
@@ -131,7 +142,7 @@ namespace PVZOnline {
         }
 
         private bool canAdd (string currentPinyin, string[] pinyin) {
-            foreach (String currentPinyin2 in pinyin) {
+            foreach (string currentPinyin2 in pinyin) {
                 if (currentPinyin.IndexOf(currentPinyin2) < 0) {
                     return false;
                 }
