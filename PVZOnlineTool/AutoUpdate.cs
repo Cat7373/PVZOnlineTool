@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -12,25 +13,25 @@ namespace PVZOnline {
         private string url;
         private int version;
         private bool ok = false;
-        internal string nextLine;
+        internal string currentLine;
 
         internal AutoUpdate (TextReader streamReader) {
             this.read(streamReader);
-            if (this.nextLine == null) {
+            if (this.currentLine == null) {
                 return;
             }
 
-            if (!check_regex.IsMatch(this.nextLine)) {
-                return;
-            }
-
-            this.read(streamReader);
-            if (!this.setURL(this.nextLine)) {
+            if (!check_regex.IsMatch(this.currentLine)) {
                 return;
             }
 
             this.read(streamReader);
-            this.ok = this.setVersion(this.nextLine);
+            if (!this.setURL(this.currentLine)) {
+                return;
+            }
+
+            this.read(streamReader);
+            this.ok = this.setVersion(this.currentLine);
         }
 
         /// <summary>
@@ -38,15 +39,15 @@ namespace PVZOnline {
         /// </summary>
         /// <param name="streamReader"></param>
         private void read (TextReader streamReader) {
-            this.nextLine = streamReader.ReadLine();
+            this.currentLine = streamReader.ReadLine();
         }
 
         /// <summary>
         /// 获取当前读取的行
         /// </summary>
         /// <returns></returns>
-        internal string getNextLine () {
-            return this.nextLine;
+        internal string getCurrentLine () {
+            return this.currentLine;
         }
 
         /// <summary>
@@ -98,23 +99,27 @@ namespace PVZOnline {
         /// 自动更新题库
         /// </summary>
         private void autoUpdate () {
-            // 下载指定 URL 的新题库
-            string fileData = httpDownloadFile(this.url);
+            try {
+                // 下载指定 URL 的新题库
+                string fileData = httpDownloadFile(this.url);
 
-            // 通过新题库实例化一个 AutoUpdate
-            TextReader textReader = new StringReader(fileData);
-            AutoUpdate autoUpdate = new AutoUpdate(textReader);
-            textReader.Close();
+                // 通过新题库实例化一个 AutoUpdate
+                TextReader textReader = new StringReader(fileData);
+                AutoUpdate autoUpdate = new AutoUpdate(textReader);
+                textReader.Close();
 
-            // 检查新题库的版本是否高于当前版本
-            if (autoUpdate.ok && autoUpdate.version > this.version) {
-                // 保存新题库
-                StreamWriter sw = new StreamWriter("questions.txt", false);
-                sw.Write(fileData);
-                sw.Close();
+                // 检查新题库的版本是否高于当前版本
+                if (autoUpdate.ok && autoUpdate.version > this.version) {
+                    // 保存新题库
+                    StreamWriter sw = new StreamWriter("questions.txt", false);
+                    sw.Write(fileData);
+                    sw.Close();
 
-                // 切换当前使用的题库到新版本
-                Program.mainForm.questions = new Questions();
+                    // 切换当前使用的题库到新版本
+                    Program.mainForm.questions = new Questions();
+                }
+            } catch (Exception e) {
+                // 自动更新失败
             }
         }
 

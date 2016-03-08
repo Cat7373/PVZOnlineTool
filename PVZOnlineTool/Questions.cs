@@ -28,7 +28,7 @@ namespace PVZOnline {
                 AutoUpdate autoUpdate = new AutoUpdate(textReader);
                 autoUpdate.startUpdate();
 
-                strLine = autoUpdate.getNextLine();
+                strLine = autoUpdate.getCurrentLine();
             } else {
                 strLine = textReader.ReadLine();
             }
