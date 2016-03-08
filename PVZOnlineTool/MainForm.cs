@@ -13,7 +13,7 @@ namespace PVZOnline {
         /// <summary>
         /// 默认标题
         /// </summary>
-        private string DEFAULT_TITLE;
+        internal string DEFAULT_TITLE;
         /// <summary>
         /// 当前输入的查询内容
         /// </summary>
@@ -79,7 +79,7 @@ namespace PVZOnline {
         /// <summary>
         /// 自动设置窗口标题
         /// </summary>
-        private void setTitle () {
+        internal void setTitle () {
             if (this.selectString.Length > 0) {
                 this.Text = this.selectString.ToString();
             } else {

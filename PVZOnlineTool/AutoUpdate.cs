@@ -117,6 +117,8 @@ namespace PVZOnline {
 
                     // 切换当前使用的题库到新版本
                     Program.mainForm.questions = new Questions();
+                    Program.mainForm.DEFAULT_TITLE = "题库已更新：" + this.version + " -> " + autoUpdate.version;
+                    Program.mainForm.setTitle();
                 }
             } catch (Exception e) {
                 // 自动更新失败
