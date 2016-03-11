@@ -21,6 +21,8 @@ namespace PVZOnline {
 
         public MainForm () {
             InitializeComponent();
+
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void MainForm_Load (object sender, EventArgs args) {

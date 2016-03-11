@@ -4,6 +4,7 @@ using System.Windows.Forms;
 namespace PVZOnline {
     static class Program {
         internal static MainForm mainForm;
+        internal static DateTime startTime = DateTime.Now;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

@@ -118,11 +118,19 @@ namespace PVZOnline {
                     // 切换当前使用的题库到新版本
                     Program.mainForm.questions = new Questions();
                     Program.mainForm.DEFAULT_TITLE = "题库已更新：" + this.version + " -> " + autoUpdate.version;
-                    Program.mainForm.setTitle();
+                } else {
+                    Program.mainForm.DEFAULT_TITLE = "题库已是最新版本：" + this.version;
                 }
             } catch (Exception e) {
-                // 自动更新失败
+                Program.mainForm.DEFAULT_TITLE = "题库自动更新失败";
             }
+
+            int waitTime = (int) (5000 - (DateTime.Now - Program.startTime).TotalMilliseconds);
+            if(waitTime > 0 && waitTime < 5000) {
+                Thread.Sleep(waitTime);
+            }
+            
+            Program.mainForm.setTitle();
         }
 
         /// <summary>

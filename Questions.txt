@@ -1,5 +1,5 @@
 // #autoupdate
-// #url: https://raw.githubusercontent.com/Cat7373/PVZOnlineTool/master/Questions.txt
+// #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/Questions.txt
 // #version: 20160310
 // 历史类
 “杯酒释兵权”的事是下列哪位皇帝的作为？
@@ -99,7 +99,7 @@
 司马光
 
 在鸦片战争中，为抗击英国侵略军而英勇牺牲的爱国将领中不包括：
-答案暂缺（试试邓廷桢？或者左宝贵？）
+陈化成
 
 为了救爱妾而引清兵入关的明末将领是？
 吴三桂
@@ -276,6 +276,7 @@ Lao-tzu
 
 给中东地区带来频繁冲突和战争的原因里面不包括的是？
 丰富的铁矿资源
+gzddqdlpfcthzzdyylmbbkds
 
 在下列的自然资源中属于可再生资源的是？
 太阳能和水
@@ -656,7 +657,7 @@ Lao-tzu
 土豆地雷的塔防天赋“快速武装”效果为放下后准备时间减少5秒，解锁除要求战力达到5100外，需要小镇等级达到？
 8级
 
-《植物大战僵尸》发售日期
+《植物大战僵尸Online》是由宝开游戏开发的一款益智策略类单机游戏，开启发售的日期是？
 2009年5月5日
 
 神奇兑换中，兑换5个[碎片-硝化菇]需要消耗植物币的数量是？
@@ -745,6 +746,7 @@ Lao-tzu
 
 疯子戴夫每隔一段时间会送给镇长免费购买经验豆的机会，请问免费购买的冷却时间是？
 22小时
+fzdfmgydsjhsgzzmfgmjyddjhqwmfgmdlqsjs
 
 开服大礼活动中，每位镇长累计登录14天都将获赠3种强力植物，其中不包括？
 双头向日葵
