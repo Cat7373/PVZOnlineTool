@@ -32,6 +32,16 @@ namespace PVZOnline {
 
         public MainForm () {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// 窗口载入完毕
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_Shown (object sender, EventArgs e) {
+            // 允许跨线程操作组件
+            Control.CheckForIllegalCrossThreadCalls = false;
 
             // 加载 info.txt
             loadInfo();
@@ -39,8 +49,14 @@ namespace PVZOnline {
             // 加载题目表
             this.questions = new Questions();
 
-            // 允许跨线程操作组件
-            Control.CheckForIllegalCrossThreadCalls = false;
+            // 刷新显示内容
+            updateUI();
+
+            // 设置启动时间
+            this.startTime = DateTime.Now;
+
+            // 启动自动更新
+            new Thread(AutoUpdate.start).Start();
         }
 
         /// <summary>
@@ -81,21 +97,10 @@ namespace PVZOnline {
         }
 
         /// <summary>
-        /// 窗口载入完毕
+        /// 用户按下某键
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private void MainForm_Load (object sender, EventArgs args) {
-            // 刷新显示内容
-            updateUI();
-
-            // 设置启动时间
-            this.startTime = DateTime.Now;
-
-            // 启动自动更新
-            new Thread(AutoUpdate.start).Start();
-        }
-
+        /// <param name="e"></param>
         private void listBox1_KeyPress (object sender, KeyPressEventArgs e) {
             // 处理输入字符
             char ch = e.KeyChar;
