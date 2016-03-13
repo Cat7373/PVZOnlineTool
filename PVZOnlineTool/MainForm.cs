@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace PVZOnline {
-    public partial class MainForm : Form {
+    internal partial class MainForm : Form {
         /// <summary>
         /// 题目表
         /// </summary>
@@ -18,11 +18,16 @@ namespace PVZOnline {
         /// 当前输入的查询内容
         /// </summary>
         private StringBuilder selectString = new StringBuilder();
+        /// <summary>
+        /// 主窗口的创建时间
+        /// </summary>
+        internal DateTime startTime;
 
         public MainForm () {
             InitializeComponent();
 
             Control.CheckForIllegalCrossThreadCalls = false;
+            this.startTime = DateTime.Now;
         }
 
         private void MainForm_Load (object sender, EventArgs args) {
@@ -40,7 +45,7 @@ namespace PVZOnline {
                         strLine = streamReader.ReadLine();
                     }
                 }
-            } catch (Exception e) {
+            } catch {
                 // 加载失败则设置标题为空
                 this.DEFAULT_TITLE = "";
             } finally {

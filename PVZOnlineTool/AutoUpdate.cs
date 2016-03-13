@@ -121,16 +121,16 @@ namespace PVZOnline {
                 } else {
                     Program.mainForm.DEFAULT_TITLE = "题库已是最新版本：" + this.version;
                 }
-            } catch (Exception e) {
+            } catch {
                 Program.mainForm.DEFAULT_TITLE = "题库自动更新失败";
             }
 
-            // 更新主窗口的标题，但是至少要等程序启动 5000 毫秒之后
-            int waitTime = (int) (5000 - (DateTime.Now - Program.startTime).TotalMilliseconds);
-            if(waitTime > 0 && waitTime < 5000) {
+            // 立即更新主窗口的标题，但是至少要等主窗口载入完毕 5000 毫秒之后
+            int waitTime = (int) (5000 - (DateTime.Now - Program.mainForm.startTime).TotalMilliseconds);
+            if (waitTime > 0 && waitTime < 5000) {
                 Thread.Sleep(waitTime);
             }
-            
+
             Program.mainForm.setTitle();
         }
 
