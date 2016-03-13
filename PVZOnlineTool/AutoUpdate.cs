@@ -78,12 +78,12 @@ namespace PVZOnline {
         internal void startAutoUpdate () {
             // 如果题库中包含了有效的自动更新头
             if (this.ok) {
-                // 为了防止更新耗时超过 5 秒 通过新线程在 5 秒后设置一次标题
+                // 5秒钟后如果自动更新还没有完成会提示“正在检查更新...”
+                Program.mainForm.defaultTitle = "正在检查更新...";
                 new Thread(AutoUpdate.setMainFormTitle).Start();
 
+                // 开始自动更新
                 try {
-                    Program.mainForm.defaultTitle = "正在检查更新...";
-
                     // 下载指定 URL 的新题库
                     string fileData = AutoUpdate.httpDownloadFile(this.url);
 
@@ -108,10 +108,12 @@ namespace PVZOnline {
                 } catch {
                     Program.mainForm.defaultTitle = "题库自动更新失败";
                 }
-
-                // 更新 MainForm 标题
-                AutoUpdate.setMainFormTitle();
+            } else {
+                Program.mainForm.defaultTitle = "未开启自动更新或自动更新设置有误";
             }
+
+            // 更新 MainForm 标题
+            AutoUpdate.setMainFormTitle();
         }
 
         /// <summary>
@@ -137,7 +139,7 @@ namespace PVZOnline {
         private static void setMainFormTitle () {
             // 立即更新主窗口的标题，但是至少要等主窗口载入完毕 5000 毫秒之后
             int waitTime = (int) (5000 - (DateTime.Now - Program.mainForm.startTime).TotalMilliseconds);
-            if (waitTime > 0 && waitTime < 5000) {
+            if (waitTime > 0 && waitTime <= 5000) {
                 Thread.Sleep(waitTime);
             }
 
