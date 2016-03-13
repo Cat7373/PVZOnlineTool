@@ -43,7 +43,7 @@ namespace PVZOnline {
             string answer = null;
 
             while (strLine != null) {
-                if (strLine.StartsWith("//") || strLine.Trim().Equals("")) {
+                if (strLine.StartsWith("//") || string.IsNullOrWhiteSpace(strLine)) {
                     switch (step) {
                         case 2:
                             addQuestion(question, answer);

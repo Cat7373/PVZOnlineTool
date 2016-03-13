@@ -146,7 +146,6 @@ namespace PVZOnline {
             string data = textReader.ReadToEnd();
 
             textReader.Close();
-            responseStream.Close();
             response.Close();
 
             return data;
