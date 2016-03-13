@@ -1,5 +1,5 @@
 // #autoupdate
-// #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/Questions.txt
+// #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
 // #version: 20160313
 // 历史类
 “杯酒释兵权”的事是下列哪位皇帝的作为？
