@@ -8,8 +8,6 @@ namespace PVZOnline {
     /// 题目表类
     /// </summary>
     class Questions {
-
-        private static bool autoUpdate = true;
         /// <summary>
         /// 题目表
         /// </summary>
@@ -21,18 +19,7 @@ namespace PVZOnline {
         public Questions () {
             TextReader textReader = new StreamReader("questions.txt");
 
-            string strLine;
-            if (Questions.autoUpdate) {
-                Questions.autoUpdate = false;
-
-                AutoUpdate autoUpdate = new AutoUpdate(textReader);
-                autoUpdate.startUpdate();
-
-                strLine = autoUpdate.getCurrentLine();
-            } else {
-                strLine = textReader.ReadLine();
-            }
-
+            string strLine = textReader.ReadLine();
 
             // 0: 等待读
             // 1: Q
@@ -134,7 +121,6 @@ namespace PVZOnline {
                 if (canAdd(currentPinyin, pinyin)) {
                     result.Add(current);
                 }
-
             }
 
             return result.ToArray();

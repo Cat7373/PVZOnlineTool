@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace PVZOnline {
     class AutoUpdate {
@@ -13,41 +14,26 @@ namespace PVZOnline {
         private string url;
         private int version;
         private bool ok = false;
-        internal string currentLine;
 
         internal AutoUpdate (TextReader streamReader) {
-            this.read(streamReader);
-            if (this.currentLine == null) {
+            string currentLine;
+
+            currentLine = streamReader.ReadLine();
+            if (string.IsNullOrWhiteSpace(currentLine)) {
                 return;
             }
 
-            if (!check_regex.IsMatch(this.currentLine)) {
+            if (!check_regex.IsMatch(currentLine)) {
                 return;
             }
 
-            this.read(streamReader);
-            if (!this.setURL(this.currentLine)) {
+            currentLine = streamReader.ReadLine();
+            if (!this.setURL(currentLine)) {
                 return;
             }
 
-            this.read(streamReader);
-            this.ok = this.setVersion(this.currentLine);
-        }
-
-        /// <summary>
-        /// 读入一行
-        /// </summary>
-        /// <param name="streamReader"></param>
-        private void read (TextReader streamReader) {
-            this.currentLine = streamReader.ReadLine();
-        }
-
-        /// <summary>
-        /// 获取当前读取的行
-        /// </summary>
-        /// <returns></returns>
-        internal string getCurrentLine () {
-            return this.currentLine;
+            currentLine = streamReader.ReadLine();
+            this.ok = this.setVersion(currentLine);
         }
 
         /// <summary>
@@ -56,7 +42,7 @@ namespace PVZOnline {
         /// <param name="line"></param>
         /// <returns></returns>
         private bool setURL (string line) {
-            if (line == null) {
+            if (string.IsNullOrWhiteSpace(line)) {
                 return false;
             }
 
@@ -74,7 +60,7 @@ namespace PVZOnline {
         /// <param name="line"></param>
         /// <returns></returns>
         private bool setVersion (string line) {
-            if (line == null) {
+            if (string.IsNullOrWhiteSpace(line)) {
                 return false;
             }
 
@@ -89,55 +75,49 @@ namespace PVZOnline {
         /// <summary>
         /// 开始自动更新题库
         /// </summary>
-        internal void startUpdate () {
+        internal void startAutoUpdate () {
+            // 如果题库中包含了有效的自动更新头
             if (this.ok) {
-                new Thread(autoUpdate).Start();
-            }
-        }
+                // 为了防止更新耗时超过 5 秒 通过新线程在 5 秒后设置一次标题
+                new Thread(AutoUpdate.setMainFormTitle).Start();
 
-        /// <summary>
-        /// 自动更新题库
-        /// </summary>
-        private void autoUpdate () {
-            try {
-                // 下载指定 URL 的新题库
-                string fileData = httpDownloadFile(this.url);
+                try {
+                    Program.mainForm.defaultTitle = "正在检查更新...";
 
-                // 通过新题库实例化一个 AutoUpdate
-                TextReader textReader = new StringReader(fileData);
-                AutoUpdate autoUpdate = new AutoUpdate(textReader);
-                textReader.Close();
+                    // 下载指定 URL 的新题库
+                    string fileData = AutoUpdate.httpDownloadFile(this.url);
 
-                // 检查新题库的版本是否高于当前版本
-                if (autoUpdate.ok && autoUpdate.version > this.version) {
-                    // 保存新题库
-                    StreamWriter sw = new StreamWriter("questions.txt", false);
-                    sw.Write(fileData);
-                    sw.Close();
+                    // 通过新题库实例化一个 AutoUpdate
+                    TextReader textReader = new StringReader(fileData);
+                    AutoUpdate autoUpdate = new AutoUpdate(textReader);
+                    textReader.Close();
 
-                    // 切换当前使用的题库到新版本
-                    Program.mainForm.questions = new Questions();
-                    Program.mainForm.DEFAULT_TITLE = "题库已更新：" + this.version + " -> " + autoUpdate.version;
-                } else {
-                    Program.mainForm.DEFAULT_TITLE = "题库已是最新版本：" + this.version;
+                    // 检查是否需要更新
+                    if (autoUpdate.ok && autoUpdate.version > this.version) {
+                        // 保存新题库
+                        StreamWriter sw = new StreamWriter("questions.txt", false);
+                        sw.Write(fileData);
+                        sw.Close();
+
+                        // 切换当前使用的题库到新版本
+                        Program.mainForm.questions = new Questions();
+                        Program.mainForm.defaultTitle = "题库已更新：" + this.version + " -> " + autoUpdate.version;
+                    } else {
+                        Program.mainForm.defaultTitle = "题库已是最新版本：" + this.version;
+                    }
+                } catch {
+                    Program.mainForm.defaultTitle = "题库自动更新失败";
                 }
-            } catch {
-                Program.mainForm.DEFAULT_TITLE = "题库自动更新失败";
-            }
 
-            // 立即更新主窗口的标题，但是至少要等主窗口载入完毕 5000 毫秒之后
-            int waitTime = (int) (5000 - (DateTime.Now - Program.mainForm.startTime).TotalMilliseconds);
-            if (waitTime > 0 && waitTime < 5000) {
-                Thread.Sleep(waitTime);
+                // 更新 MainForm 标题
+                AutoUpdate.setMainFormTitle();
             }
-
-            Program.mainForm.setTitle();
         }
 
         /// <summary>
         /// Http下载文件
         /// </summary>
-        private string httpDownloadFile (string url) {
+        private static string httpDownloadFile (string url) {
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
             Stream responseStream = response.GetResponseStream();
@@ -149,6 +129,34 @@ namespace PVZOnline {
             response.Close();
 
             return data;
+        }
+
+        /// <summary>
+        /// 调用一次 MainForm 的 updateUI 来设置标题
+        /// </summary>
+        private static void setMainFormTitle () {
+            // 立即更新主窗口的标题，但是至少要等主窗口载入完毕 5000 毫秒之后
+            int waitTime = (int) (5000 - (DateTime.Now - Program.mainForm.startTime).TotalMilliseconds);
+            if (waitTime > 0 && waitTime < 5000) {
+                Thread.Sleep(waitTime);
+            }
+
+            Program.mainForm.updateUI(false);
+        }
+
+        /// <summary>
+        /// 启动自动更新
+        /// </summary>
+        internal static void start () {
+            try {
+                TextReader textReader = new StreamReader("questions.txt");
+                AutoUpdate autoUpdate = new AutoUpdate(textReader);
+                textReader.Close();
+
+                autoUpdate.startAutoUpdate();
+            } catch (Exception e) {
+                MessageBox.Show(e.ToString(), "自动更新时发生了一个未处理的错误(Ctrl + C 可复制详细信息)", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
