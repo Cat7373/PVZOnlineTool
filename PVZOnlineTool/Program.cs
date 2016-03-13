@@ -10,10 +10,14 @@ namespace PVZOnline {
         /// </summary>
         [STAThread]
         static void Main() {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            mainForm = new MainForm();
-            Application.Run(mainForm);
+            try {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                mainForm = new MainForm();
+                Application.Run(mainForm);
+            } catch (Exception e) {
+                MessageBox.Show(e.ToString(), "发生了一个未处理的错误(Ctrl + C 可复制详细信息)", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

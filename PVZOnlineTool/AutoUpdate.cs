@@ -125,6 +125,7 @@ namespace PVZOnline {
                 Program.mainForm.DEFAULT_TITLE = "题库自动更新失败";
             }
 
+            // 更新主窗口的标题，但是至少要等程序启动 5000 毫秒之后
             int waitTime = (int) (5000 - (DateTime.Now - Program.startTime).TotalMilliseconds);
             if(waitTime > 0 && waitTime < 5000) {
                 Thread.Sleep(waitTime);
