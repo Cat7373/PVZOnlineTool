@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace PVZOnline {
+namespace QuickSearchTool {
     internal partial class MainForm : Form {
         /// <summary>
         /// 主窗口创建完毕的时间
@@ -147,6 +147,10 @@ namespace PVZOnline {
                     }
                 }
             }
+        }
+
+        private void MainForm_Load (object sender, EventArgs e) {
+
         }
     }
 }

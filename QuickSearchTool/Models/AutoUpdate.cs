@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace PVZOnline {
+namespace QuickSearchTool {
     class AutoUpdate {
         private static Regex check_regex = new Regex("^//\\s*#autoupdate\\s*$");
         private static Regex url_regex = new Regex("^//\\s*#url\\s*:\\s*(http.+)\\s*$");

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace PVZOnline {
+namespace QuickSearchTool {
     static class Program {
         internal static MainForm mainForm;
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace PVZOnline {
+﻿namespace QuickSearchTool {
     partial class MainForm {
         /// <summary>
         /// 必需的设计器变量。
@@ -49,6 +49,7 @@
             this.Name = "MainForm";
             this.Opacity = 0.95D;
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
 

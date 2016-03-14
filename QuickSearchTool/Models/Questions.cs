@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using NPinyin;
 
-namespace PVZOnline {
+namespace QuickSearchTool {
     /// <summary>
     /// 题目表类
     /// </summary>

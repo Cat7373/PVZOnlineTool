@@ -2,8 +2,7 @@
 !.gitignore
 !README.md
 !LICENSE
-!NPinyin.dll
 !questions.txt
 !info.txt
-!PVZOnlineTool.sln
-!/PVZOnlineTool/
+!QuickSearchTool.sln
+!/QuickSearchTool/
