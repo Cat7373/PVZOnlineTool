@@ -30,10 +30,8 @@ namespace QuickSearchTool {
 
             while (strLine != null) {
                 if (strLine.StartsWith("//") || string.IsNullOrWhiteSpace(strLine)) {
-                    switch (step) {
-                        case 2:
-                            addQuestion(question, answer);
-                            break;
+                    if (step == 2) {
+                        addQuestion(question, answer);
                     }
                     step = 0;
                 } else {
