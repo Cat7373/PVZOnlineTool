@@ -82,7 +82,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\NPinyin\PyCode.cs" />
-    <Compile Include="Models\NPinyin\PyHash.cs" />
     <Compile Include="Models\Questions.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

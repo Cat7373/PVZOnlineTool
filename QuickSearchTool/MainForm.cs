@@ -46,6 +46,9 @@ namespace QuickSearchTool {
             // 加载 info.txt
             loadInfo();
 
+            // 初始化拼音库
+            Pinyin.init();
+
             // 加载题目表
             this.questions = new Questions();
 
@@ -147,10 +150,6 @@ namespace QuickSearchTool {
                     }
                 }
             }
-        }
-
-        private void MainForm_Load (object sender, EventArgs e) {
-
         }
     }
 }

@@ -49,7 +49,6 @@
             this.Name = "MainForm";
             this.Opacity = 0.95D;
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
 
