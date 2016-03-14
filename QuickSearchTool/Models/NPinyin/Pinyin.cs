@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
 namespace QuickSearchTool {
-    public static class Pinyin {
+    internal static class Pinyin {
         /// <summary>
         /// 索引列表
         /// </summary>
-        internal static short[][] hashes = new short[PyCode.codes.Length][];
+        private static short[][] hashes = new short[PyCode.codes.Length][];
 
         /// <summary>
         /// 初始化

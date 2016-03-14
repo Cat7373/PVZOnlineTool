@@ -6,7 +6,7 @@ namespace QuickSearchTool {
     /// <summary>
     /// 题目表类
     /// </summary>
-    class Questions {
+    internal class Questions {
         /// <summary>
         /// 题目表
         /// </summary>
@@ -15,7 +15,7 @@ namespace QuickSearchTool {
         /// <summary>
         /// 初始化
         /// </summary>
-        public Questions () {
+        internal Questions () {
             TextReader textReader = new StreamReader("questions.txt");
 
             string strLine = textReader.ReadLine();
@@ -109,7 +109,7 @@ namespace QuickSearchTool {
         /// </summary>
         /// <param name="pinyin">拼音速查代码中的一部分</param>
         /// <returns>题目列表</returns>
-        public Dictionary<string, string>[] getQuestion (string[] pinyin) {
+        internal Dictionary<string, string>[] getQuestion (string[] pinyin) {
             List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
 
             IEnumerator<Dictionary<string, string>> it = questions.GetEnumerator();

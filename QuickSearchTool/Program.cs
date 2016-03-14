@@ -2,13 +2,13 @@
 using System.Windows.Forms;
 
 namespace QuickSearchTool {
-    static class Program {
+    internal static class Program {
         internal static MainForm mainForm;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main () {
+        internal static void Main () {
             try {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);

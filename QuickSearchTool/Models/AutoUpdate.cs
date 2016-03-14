@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 namespace QuickSearchTool {
-    class AutoUpdate {
+    internal class AutoUpdate {
         private static Regex check_regex = new Regex("^//\\s*#autoupdate\\s*$");
         private static Regex url_regex = new Regex("^//\\s*#url\\s*:\\s*(http.+)\\s*$");
         private static Regex version_regex = new Regex("^//\\s*#version\\s*:\\s*(\\d+)\\s*$");

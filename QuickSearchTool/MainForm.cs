@@ -30,7 +30,7 @@ namespace QuickSearchTool {
         /// </summary>
         private StringBuilder selectString = new StringBuilder();
 
-        public MainForm () {
+        internal MainForm () {
             InitializeComponent();
         }
 
