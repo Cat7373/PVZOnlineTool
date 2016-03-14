@@ -31,19 +31,22 @@ namespace QuickSearchTool {
         }
 
         /// <summary>
-        /// 返回单个字符的汉字拼音
+        /// 返回单个字符的拼音首字母
         /// </summary>
         /// <param name="ch">编码为UTF8的中文字符</param>
-        /// <returns>ch对应的拼音</returns>
-        internal static string GetPinyin (char ch) {
+        /// <returns>ch对应的拼音首字母, 如果没有找到, 则返回字符本身</returns>
+        internal static char GetPinyin (char ch) {
             short hash = Pinyin.GetHashIndex(ch);
+
             for (var i = 0; i < Pinyin.hashes[hash].Length; ++i) {
                 short index = Pinyin.hashes[hash][i];
-                var pos = PyCode.codes[index].IndexOf(ch, 7);
-                if (pos != -1)
-                    return PyCode.codes[index].Substring(0, 6).Trim();
+                var pos = PyCode.codes[index].IndexOf(ch, 2);
+                if (pos != -1) {
+                    return PyCode.codes[index][0];
+                }    
             }
-            return ch.ToString();
+
+            return ch;
         }
 
         /// <summary>

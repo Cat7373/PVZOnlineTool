@@ -95,10 +95,9 @@ namespace QuickSearchTool {
         private string getPinYin (string question) {
             StringBuilder result = new StringBuilder();
             foreach (char ch in question.ToLower()) {
-                string pinyin = Pinyin.GetPinyin(ch);
-                char firstPinyin = pinyin[0];
-                if ((firstPinyin >= '0' && firstPinyin <= '9') || (firstPinyin >= 'a' && firstPinyin <= 'z')) {
-                    result.Append(firstPinyin);
+                char pinyin = Pinyin.GetPinyin(ch);
+                if ((pinyin >= '0' && pinyin <= '9') || (pinyin >= 'a' && pinyin <= 'z')) {
+                    result.Append(pinyin);
                 }
             }
 
