@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160314
+// #version: 20160317
 // 历史类
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
@@ -310,7 +310,7 @@ Lao-tzu
 沟通地中海与大西洋的交通要道是？
 直布罗陀海峡
 
-下列地区中多雨的地形是
+下列地区中多雨地形的是？
 喜马拉雅山南坡
 
 若北京时间14时测得该地的竿影为一天中最短，那么该学校可能位于？
