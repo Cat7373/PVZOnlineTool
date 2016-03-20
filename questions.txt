@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160319
+// #version: 20160320
 // 历史类
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
@@ -458,6 +458,9 @@ Lao-tzu
 
 欧洲的“袖珍国”都很重视？
 旅游业
+
+制约环境人口容量的主要因素是？
+资源
 
 // 创新巧解题
 共9个一元钱面值的硬币，其中一个偏重，用天平最少几次能保证将此硬币找出来？
