@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160322
+// #version: 20160325
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
 
@@ -768,3 +768,6 @@ Lao-tzu
 
 世界树在小镇达到16级时开启，但只有每天限定时间段内才能挑战，请问世界BOSS每天开启的时间是？
 10:00
+
+《植物大战僵尸Online》的阳光房中，宠物形象是下列哪种动物？
+刺猬
