@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160327
+// #version: 20160331
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
 
@@ -647,7 +647,7 @@ Lao-tzu
 500级
 
 双头向日葵从3星升星到5星总共需要多少个碎片？
-640片
+640
 
 《植物大战僵尸Online》中看起来很酷的捕蝇草共有几颗牙齿？
 14颗
