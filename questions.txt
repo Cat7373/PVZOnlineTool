@@ -1,6 +1,7 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160531
+// #version: 20160601
+
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
 
@@ -786,3 +787,9 @@ Lao-tzu
 
 中国旅游图标中的马踏飞燕文物出土于？
 甘肃武威
+
+北宋张择端的名作《清明上河图》所描绘的是哪座古城？
+答案暂缺 (汴京、东京、开封、汴河都可能是正确答案)
+
+以下名言中非出自《论语》的一句是？
+先天下之忧而忧
