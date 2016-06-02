@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160601
+// #version: 20160602
 
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
@@ -793,3 +793,6 @@ Lao-tzu
 
 以下名言中非出自《论语》的一句是？
 先天下之忧而忧
+
+“弱冠”指的是多少岁？
+二十岁
