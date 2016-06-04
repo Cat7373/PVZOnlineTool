@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160603
+// #version: 20160604
 
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
@@ -64,6 +64,7 @@
 
 谁曾将匈奴打出河套及其以西一带，出现“漠南无王庭”的局面？
 汉武帝
+scjxndchtjqyxydcxmnwwtdjm
 
 战国时期,总结前人医疗经验归纳出的四诊法,是哪位名医?
 扁鹊
@@ -208,6 +209,7 @@ Lao-tzu
 
 宋·沈括的《梦溪笔谈》中曾记载：“方家以磁石摩针锋，则能指南，然常微偏东，不全南也。”请问这是对什么的描述？
 地磁偏角
+sskdmxbtzcjzfjycsmzfznznrcwpdbqnyqwzsdsmdms
 
 《道德经》是谁的著作？
 老子
@@ -586,6 +588,7 @@ Lao-tzu
 
 曾经的一次版本更新中，阳光房系统取代了什么系统
 农场系统
+cjdycbbgxzygfxtqdlsmxt
 
 小镇建筑“哨塔”中可容纳盟友驻军的数量上限是几支队伍？
 5队
@@ -607,6 +610,7 @@ Lao-tzu
 
 冰冻生菜有一套稀有时装有着飘逸的白发，官方曾命名为“暴风女”，那么其设计灵感来自于下列哪一部电视剧？
 冰与火之歌
+bdscyytxyszyzpydbfgfcmmwbfnnmqsjlglzyxlnybdsj
 
 植物装备的头盔进阶到稀有品质后，其外形是参考下列哪种动物制作的？
 灰狼

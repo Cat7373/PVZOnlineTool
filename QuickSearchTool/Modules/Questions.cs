@@ -58,6 +58,8 @@ namespace QuickSearchTool {
             }
 
             textReader.Close();
+
+            // System.Diagnostics.Debug.WriteLine(getPinYin(""));
         }
 
         /// <summary>
