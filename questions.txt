@@ -1,6 +1,6 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20160604
+// #version: 20160608
 
 “杯酒释兵权”的事是下列哪位皇帝的作为？
 宋太祖
@@ -797,3 +797,6 @@ bdscyytxyszyzpydbfgfcmmwbfnnmqsjlglzyxlnybdsj
 
 “弱冠”指的是多少岁？
 二十岁
+
+以下不能从“神秘卡包”中获得的植物是？
+玫瑰剑客
