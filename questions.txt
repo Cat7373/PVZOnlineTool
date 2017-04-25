@@ -1,8 +1,11 @@
 // #autoupdate
 // #url: http://git.oschina.net/cat73/PVZOnlineTool/raw/master/questions.txt
-// #version: 20170213
+// #version: 20170425
 在中华民俗上，送礼物可有不少禁忌。请问下列何者推荐作为礼物送给别人？（柠檬366区 大芒果、）
 油纸伞
+
+中医沿用的四诊法来自于春秋战国之际的哪位名医？
+扁鹊
 
 世界地球日是哪一天？
 4月22号
